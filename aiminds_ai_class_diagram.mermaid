@@ -1,0 +1,165 @@
+classDiagram
+    class User {
+        +string id
+        +string name
+        +string businessType
+        +string email
+        +string phone
+        +Date createdAt
+        +saveToDatabase() boolean
+        +updateProfile(UserProfile) boolean
+    }
+
+    class Lead {
+        +string id
+        +string name
+        +string businessType
+        +string email
+        +string phone
+        +string source
+        +string status
+        +Array~string~ interests
+        +Date createdAt
+        +saveToDatabase() boolean
+        +updateStatus(string) boolean
+        +scheduleMeeting(Date) boolean
+    }
+
+    class Consultation {
+        +string id
+        +string leadId
+        +Date scheduledTime
+        +string status
+        +Array~string~ notes
+        +string meetingLink
+        +createConsultation() boolean
+        +reschedule(Date) boolean
+        +cancel() boolean
+        +addNote(string) boolean
+    }
+
+    class AIChatbot {
+        +string sessionId
+        +string currentPageContext
+        +Array~Message~ messageHistory
+        +initializeChat() void
+        +sendMessage(string) Promise~Response~
+        +handleUserInput(string) string
+        +transferToHuman() boolean
+        +updateContext(string) void
+        +saveConversation() boolean
+    }
+
+    class Message {
+        +string id
+        +string sessionId
+        +string content
+        +string type
+        +Date timestamp
+        +saveMessage() boolean
+    }
+
+    class ROICalculator {
+        +number employeeCost
+        +number hoursPerTask
+        +number tasksPerWeek
+        +number automationEfficiency
+        +calculateWeeklySavings() number
+        +calculateMonthlySavings() number
+        +calculateYearlySavings() number
+        +getImplementationCost() number
+        +calculateROI() number
+        +generateReport() ROIReport
+    }
+
+    class ROIReport {
+        +number weeklySavings
+        +number monthlySavings
+        +number yearlySavings
+        +number implementationCost
+        +number roi
+        +number breakEvenMonths
+        +Date generatedAt
+        +saveReport() boolean
+        +emailReport(string) boolean
+    }
+
+    class AssistantBuilder {
+        +string industry
+        +Array~string~ selectedFeatures
+        +Array~string~ integrations
+        +string complexity
+        +addFeature(string) void
+        +removeFeature(string) void
+        +addIntegration(string) void
+        +removeIntegration(string) void
+        +calculateEstimatedPrice() number
+        +generateAssistantPreview() AssistantPreview
+        +saveConfiguration() boolean
+    }
+
+    class AssistantPreview {
+        +string configId
+        +string industry
+        +Array~string~ features
+        +Array~string~ integrations
+        +number estimatedPrice
+        +renderPreview() HTMLElement
+        +saveAsLead(UserInfo) boolean
+    }
+
+    class CaseStudy {
+        +string id
+        +string industry
+        +string businessName
+        +string challenge
+        +string solution
+        +string results
+        +Array~string~ metrics
+        +string testimonial
+        +Array~string~ mediaUrls
+        +fetchByIndustry(string) Array~CaseStudy~
+    }
+
+    class BlogPost {
+        +string id
+        +string title
+        +string content
+        +string author
+        +Date publishDate
+        +Array~string~ categories
+        +Array~string~ tags
+        +string featuredImage
+        +number views
+        +fetchPosts(filters) Array~BlogPost~
+        +searchPosts(string) Array~BlogPost~
+    }
+
+    class AnalyticsManager {
+        +trackPageView(string) void
+        +trackEvent(string, Object) void
+        +trackConversion(string) void
+        +getPageViewStats() Object
+        +getEventStats() Object
+        +getConversionRate() number
+    }
+
+    class CRMConnector {
+        +createLead(Lead) boolean
+        +updateLead(string, Lead) boolean
+        +fetchLeads(filters) Array~Lead~
+        +createTask(Task) boolean
+        +syncCalendarEvents() boolean
+    }
+
+    Lead "1" -- "0..*" Consultation : schedules
+    User "1" -- "0..*" Lead : becomes
+    Lead "1" -- "0..*" AssistantPreview : configures
+    AIChatbot "1" -- "0..*" Message : contains
+    ROICalculator "1" -- "1" ROIReport : generates
+    AssistantBuilder "1" -- "1" AssistantPreview : creates
+    CRMConnector "1" -- "0..*" Lead : manages
+    CRMConnector "1" -- "0..*" Consultation : schedules
+    AnalyticsManager -- AIChatbot : tracks
+    AnalyticsManager -- ROICalculator : tracks
+    AnalyticsManager -- AssistantBuilder : tracks

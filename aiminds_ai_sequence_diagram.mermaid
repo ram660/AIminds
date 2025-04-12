@@ -1,0 +1,123 @@
+sequenceDiagram
+    participant User
+    participant Homepage
+    participant AIGreeter
+    participant ChatService
+    participant AnalyticsManager
+
+    User->>Homepage: Visits website
+    Homepage->>AnalyticsManager: trackPageView('homepage')
+    Homepage->>AIGreeter: initializeChat()
+    AIGreeter->>ChatService: establishConnection()
+    ChatService-->>AIGreeter: connectionEstablished
+    AIGreeter->>User: Display welcome message
+    User->>AIGreeter: Sends query
+    AIGreeter->>ChatService: sendMessage(query)
+    ChatService-->>AIGreeter: responseMessage
+    AIGreeter->>User: Display response
+    AIGreeter->>AnalyticsManager: trackEvent('chat_interaction', {query: query})
+
+    Note over User,AnalyticsManager: Industry Page Visit Flow
+    
+    participant NavMenu
+    participant IndustryPage
+    participant CaseStudyService
+    participant TestimonialService
+    
+    User->>NavMenu: Clicks industry (e.g., 'Real Estate')
+    NavMenu->>IndustryPage: navigateTo('real-estate')
+    IndustryPage->>AnalyticsManager: trackPageView('industry/real-estate')
+    IndustryPage->>CaseStudyService: fetchCaseStudies('real-estate')
+    CaseStudyService-->>IndustryPage: caseStudiesData
+    IndustryPage->>TestimonialService: fetchTestimonials('real-estate')
+    TestimonialService-->>IndustryPage: testimonialsData
+    IndustryPage->>User: Render industry page content
+    User->>IndustryPage: Clicks on case study
+    IndustryPage->>AnalyticsManager: trackEvent('case_study_view', {id: caseStudyId})
+    IndustryPage->>User: Display detailed case study
+
+    Note over User,AnalyticsManager: ROI Calculator Flow
+    
+    participant ROICalculatorUI
+    participant ROICalculatorService
+    participant ReportGenerator
+    participant CRMConnector
+    participant EmailService
+    
+    User->>ROICalculatorUI: Enter business data
+    ROICalculatorUI->>AnalyticsManager: trackEvent('roi_calculator_start')
+    User->>ROICalculatorUI: Submit calculation
+    ROICalculatorUI->>ROICalculatorService: calculateROI(formData)
+    ROICalculatorService->>ROICalculatorService: performCalculations()
+    ROICalculatorService->>ReportGenerator: generateReport(results)
+    ReportGenerator-->>ROICalculatorService: formattedReport
+    ROICalculatorService-->>ROICalculatorUI: calculationResults
+    ROICalculatorUI->>User: Display ROI results
+    ROICalculatorUI->>AnalyticsManager: trackEvent('roi_calculation_complete')
+    User->>ROICalculatorUI: Request email report
+    ROICalculatorUI->>User: Display email form
+    User->>ROICalculatorUI: Submit email
+    ROICalculatorUI->>ReportGenerator: emailReport(email, report)
+    ReportGenerator->>EmailService: sendEmail(email, reportContent)
+    EmailService-->>ReportGenerator: emailSent
+    ReportGenerator-->>ROICalculatorUI: emailSent
+    ROICalculatorUI->>CRMConnector: createLead({email, calculationResults})
+    CRMConnector-->>ROICalculatorUI: leadCreated
+    ROICalculatorUI->>AnalyticsManager: trackConversion('roi_report_requested')
+
+    Note over User,AnalyticsManager: Consultation Booking Flow
+    
+    participant ContactPage
+    participant IntakeForm
+    participant CalendarService
+    
+    User->>ContactPage: Click 'Schedule Consultation'
+    ContactPage->>AnalyticsManager: trackPageView('contact')
+    ContactPage->>IntakeForm: initializeForm()
+    IntakeForm->>User: Display conversation form
+    User->>IntakeForm: Complete form fields
+    IntakeForm->>User: Show calendar widget
+    User->>CalendarService: Select date/time
+    CalendarService->>CalendarService: checkAvailability(datetime)
+    CalendarService-->>User: Confirm time slot
+    User->>IntakeForm: Confirm booking
+    IntakeForm->>CRMConnector: createLead(formData)
+    IntakeForm->>CRMConnector: createConsultation(leadId, datetime)
+    CRMConnector-->>IntakeForm: consultationCreated
+    IntakeForm->>EmailService: sendConfirmation(email, consultationDetails)
+    EmailService-->>IntakeForm: emailSent
+    IntakeForm->>User: Display confirmation
+    IntakeForm->>AnalyticsManager: trackConversion('consultation_booked')
+
+    Note over User,AnalyticsManager: Build Your Assistant Wizard Flow
+    
+    participant WizardUI
+    participant AssistantBuilderService
+    participant PricingEngine
+    participant PreviewGenerator
+    
+    User->>WizardUI: Start wizard
+    WizardUI->>AnalyticsManager: trackEvent('assistant_builder_start')
+    WizardUI->>User: Display industry selection
+    User->>WizardUI: Select industry
+    WizardUI->>User: Display features selection
+    User->>WizardUI: Select features
+    WizardUI->>User: Display integrations options
+    User->>WizardUI: Select integrations
+    WizardUI->>AssistantBuilderService: buildConfiguration(selections)
+    AssistantBuilderService->>PricingEngine: calculateEstimate(configuration)
+    PricingEngine-->>AssistantBuilderService: priceEstimate
+    AssistantBuilderService->>PreviewGenerator: generatePreview(configuration)
+    PreviewGenerator-->>AssistantBuilderService: assistantPreview
+    AssistantBuilderService-->>WizardUI: configurationComplete
+    WizardUI->>User: Display assistant preview and price estimate
+    WizardUI->>AnalyticsManager: trackEvent('assistant_configuration_complete')
+    User->>WizardUI: Request consultation
+    WizardUI->>User: Display contact form
+    User->>WizardUI: Submit contact details
+    WizardUI->>CRMConnector: saveConfiguration(config, userDetails)
+    CRMConnector->>CRMConnector: createLead(userDetails)
+    CRMConnector->>CRMConnector: attachConfiguration(leadId, config)
+    CRMConnector-->>WizardUI: configurationSaved
+    WizardUI->>User: Display confirmation
+    WizardUI->>AnalyticsManager: trackConversion('assistant_consultation_requested')
