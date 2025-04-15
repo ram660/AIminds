@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="bg-primary text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <Link to="/" className="text-2xl font-heading font-bold flex items-center mb-4">
-              <span className="text-secondary">AI</span>minds<span className="text-accent">.ai</span>
+            <Link to="/" className="flex items-center mb-4">
+              <img src="/assets/images/logo/aiminds-logo.svg" alt="AIminds Logo" className="h-28" />
+              <span className="text-4xl font-heading font-bold -ml-6"><span className="text-secondary">AI</span><span className="text-white">minds</span></span>
             </Link>
             <p className="font-body mb-4">
               Empowering local businesses with personalized AI assistants to boost productivity and enhance customer experience.
@@ -65,10 +66,10 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h3 className="text-lg font-heading font-bold mb-4">Contact Us</h3>
-            <p className="font-body mb-2">Email: info@aiminds.ai</p>
-            <p className="font-body mb-4">Phone: (555) 123-4567</p>
-            <Link 
-              to="/contact" 
+            <p className="font-body mb-2">Email: ram.malineni@outlook.com</p>
+            <p className="font-body mb-4">Phone: (905) 329-2291</p>
+            <Link
+              to="/contact"
               className="bg-secondary hover:bg-accent text-white px-4 py-2 rounded-md transition-colors duration-200 inline-block font-heading font-medium"
             >
               Schedule a Consultation
@@ -78,7 +79,7 @@ const Footer = () => {
 
         {/* Bottom Footer */}
         <div className="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row justify-between items-center font-body">
-          <p>&copy; {currentYear} AIminds.ai. All rights reserved.</p>
+          <p>&copy; {currentYear} AIminds. All rights reserved.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="hover:text-secondary transition-colors duration-200">Privacy Policy</Link>
             <Link to="/terms-of-service" className="hover:text-secondary transition-colors duration-200">Terms of Service</Link>

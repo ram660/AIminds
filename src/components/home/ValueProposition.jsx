@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import CountUp from 'react-countup';
 import { FaClock, FaChartLine, FaRobot } from 'react-icons/fa';
+import GlassCard from '../shared/GlassCard';
 
 const stats = [
   {
@@ -29,41 +30,43 @@ const stats = [
 
 const ValueProposition = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-20 bg-gradient-to-b from-white to-light">
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-4">The AIminds.ai Advantage</h2>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary mb-4">The AIminds Advantage</h2>
           <p className="text-lg font-body text-gray-600 max-w-3xl mx-auto">
             Our AI assistants deliver measurable results for local businesses across all industries
           </p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {stats.map((stat, index) => (
-            <motion.div 
+            <motion.div
               key={stat.label}
-              className="bg-light rounded-lg p-6 text-center"
+              className="text-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="flex justify-center">
-                {stat.icon}
-              </div>
-              <div className="text-4xl font-heading font-bold text-primary mb-2">
-                <span className="text-secondary">{stat.prefix}</span>
-                <CountUp end={stat.value} duration={2.5} enableScrollSpy scrollSpyOnce />
-                <span className="text-secondary">{stat.suffix}</span>
-              </div>
-              <h3 className="text-xl font-heading font-semibold mb-3">{stat.label}</h3>
-              <p className="text-gray-600 font-body">{stat.description}</p>
+              <GlassCard className="h-full transform hover:scale-105 transition-transform duration-300">
+                <div className="flex justify-center">
+                  {stat.icon}
+                </div>
+                <div className="text-4xl font-heading font-bold text-primary mb-2">
+                  <span className="text-secondary">{stat.prefix}</span>
+                  <CountUp end={stat.value} duration={2.5} enableScrollSpy scrollSpyOnce />
+                  <span className="text-secondary">{stat.suffix}</span>
+                </div>
+                <h3 className="text-xl font-heading font-semibold mb-3 text-primary">{stat.label}</h3>
+                <p className="text-gray-600 font-body">{stat.description}</p>
+              </GlassCard>
             </motion.div>
           ))}
         </div>

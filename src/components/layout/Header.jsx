@@ -20,11 +20,12 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-6 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
-          <Link to="/" className="text-2xl font-heading font-bold text-primary flex items-center">
-            <span className="text-secondary">AI</span>minds<span className="text-accent">.ai</span>
+          <Link to="/" className="flex items-center">
+            <img src="/assets/images/logo/aiminds-logo.svg" alt="AIminds Logo" className="h-28" />
+            <span className="text-4xl font-heading font-bold -ml-6"><span className="text-secondary">AI</span><span className="text-primary">minds</span></span>
           </Link>
         </div>
 

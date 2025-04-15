@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32" height="32" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- Head outline -->
+  <path d="M520 200C650 200 750 300 750 500C750 600 650 700 520 700L520 750C350 750 250 650 250 500L250 200L520 200Z" stroke="#009BFF" stroke-width="30" fill="none"/>
+  <!-- Network nodes -->
+  <circle cx="400" cy="350" r="40" fill="#009BFF"/>
+  <circle cx="550" cy="450" r="40" fill="#009BFF"/>
+  <circle cx="400" cy="550" r="40" fill="#009BFF"/>
+  <!-- Network connections -->
+  <path d="M400 350L550 450L400 550" stroke="#009BFF" stroke-width="20" fill="none"/>
+</svg>

@@ -4,14 +4,14 @@ import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 
 const ContactInfo = () => {
   return (
-    <motion.div 
+    <motion.div
       className="bg-light rounded-lg shadow-md p-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
       <h2 className="text-2xl font-heading font-bold text-primary mb-6">Contact Information</h2>
-      
+
       <div className="space-y-6">
         <div className="flex items-start">
           <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mr-4">
@@ -19,22 +19,21 @@ const ContactInfo = () => {
           </div>
           <div>
             <h3 className="font-heading font-semibold text-primary">Email</h3>
-            <p className="font-body text-gray-600">info@aiminds.ai</p>
-            <p className="font-body text-gray-600">support@aiminds.ai</p>
+            <p className="font-body text-gray-600">ram.malineni@outlook.com</p>
           </div>
         </div>
-        
+
         <div className="flex items-start">
           <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mr-4">
             <FaPhone className="text-secondary" />
           </div>
           <div>
             <h3 className="font-heading font-semibold text-primary">Phone</h3>
-            <p className="font-body text-gray-600">(555) 123-4567</p>
-            <p className="font-body text-gray-600">(555) 987-6543</p>
+            <p className="font-body text-gray-600">(905) 329-2291</p>
+            <p className="font-body text-gray-600">(289) 823-2849</p>
           </div>
         </div>
-        
+
         <div className="flex items-start">
           <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mr-4">
             <FaMapMarkerAlt className="text-secondary" />
@@ -42,13 +41,13 @@ const ContactInfo = () => {
           <div>
             <h3 className="font-heading font-semibold text-primary">Address</h3>
             <p className="font-body text-gray-600">
-              123 AI Innovation Street<br />
-              Tech District<br />
-              San Francisco, CA 94105
+              20420 91b Ave<br />
+              Langley Township<br />
+              BC, V1M 1B5
             </p>
           </div>
         </div>
-        
+
         <div className="flex items-start">
           <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mr-4">
             <FaClock className="text-secondary" />
@@ -63,13 +62,13 @@ const ContactInfo = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="mt-8">
         <h3 className="font-heading font-semibold text-primary mb-2">Connect With Us</h3>
         <div className="flex space-x-4">
-          <a 
-            href="https://twitter.com/aiminds" 
-            target="_blank" 
+          <a
+            href="https://twitter.com/aiminds"
+            target="_blank"
             rel="noopener noreferrer"
             className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary transition-colors duration-200"
             aria-label="Twitter"
@@ -78,9 +77,9 @@ const ContactInfo = () => {
               <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
             </svg>
           </a>
-          <a 
-            href="https://linkedin.com/company/aiminds" 
-            target="_blank" 
+          <a
+            href="https://linkedin.com/company/aiminds"
+            target="_blank"
             rel="noopener noreferrer"
             className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary transition-colors duration-200"
             aria-label="LinkedIn"
@@ -90,9 +89,9 @@ const ContactInfo = () => {
               <circle cx="4" cy="4" r="2" />
             </svg>
           </a>
-          <a 
-            href="https://facebook.com/aiminds" 
-            target="_blank" 
+          <a
+            href="https://facebook.com/aiminds"
+            target="_blank"
             rel="noopener noreferrer"
             className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary transition-colors duration-200"
             aria-label="Facebook"
@@ -101,9 +100,9 @@ const ContactInfo = () => {
               <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
             </svg>
           </a>
-          <a 
-            href="https://instagram.com/aiminds" 
-            target="_blank" 
+          <a
+            href="https://instagram.com/aiminds"
+            target="_blank"
             rel="noopener noreferrer"
             className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary transition-colors duration-200"
             aria-label="Instagram"

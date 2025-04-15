@@ -1,6 +1,6 @@
-# AIminds.ai Website
+# AIminds Website
 
-A modern, responsive website for AIminds.ai, a company that provides personalized AI assistants for local businesses.
+A modern, responsive website for AIminds, a company that provides personalized AI assistants for local businesses.
 
 ## Features
 

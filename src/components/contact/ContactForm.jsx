@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { motion } from 'framer-motion';
 
 const industries = [
@@ -20,13 +21,13 @@ const ContactForm = () => {
     message: '',
     consent: false
   });
-  
+
   const [formStatus, setFormStatus] = useState({
     submitted: false,
     success: false,
     message: ''
   });
-  
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
@@ -34,43 +35,84 @@ const ContactForm = () => {
       [name]: type === 'checkbox' ? checked : value
     }));
   };
-  
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Simulate form submission
+
+    if (!formData.consent) {
+      setFormStatus({
+        submitted: true,
+        success: false,
+        message: 'Please provide consent before submitting.'
+      });
+      return;
+    }
+
+    // Set loading state
     setFormStatus({
       submitted: true,
       success: true,
-      message: 'Thank you for your message! Our team will contact you shortly.'
+      message: 'Sending your message...'
     });
-    
-    // In a real implementation, you would send the form data to your backend
-    console.log('Form submitted:', formData);
-    
-    // Reset form after successful submission
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      company: '',
-      industry: '',
-      message: '',
-      consent: false
-    });
+
+    const templateParams = {
+      full_name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      company: formData.company,
+      industry: formData.industry,
+      message: formData.message,
+      year: new Date().getFullYear()
+    };
+
+    emailjs
+      .send(
+        'service_fetvrur',       // Your service ID
+        'template_9mnbcn9',      // Your template ID
+        templateParams,
+        'kjgQ6x_nOV6FYKAVu'      // Your EmailJS public key
+      )
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setFormStatus({
+          submitted: true,
+          success: true,
+          message: 'Thank you for your message! Our team will contact you shortly.'
+        });
+
+        // Reset form after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          company: '',
+          industry: '',
+          message: '',
+          consent: false
+        });
+      })
+      .catch((error) => {
+        console.error('EmailJS Error:', error);
+        setFormStatus({
+          submitted: true,
+          success: false,
+          message: 'Oops! Something went wrong. Please try again later.'
+        });
+      });
   };
-  
+
   return (
-    <motion.div 
+    <motion.div
       className="bg-white rounded-lg shadow-md p-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
       <h2 className="text-2xl font-heading font-bold text-primary mb-6">Get in Touch</h2>
-      
+
       {formStatus.submitted ? (
-        <motion.div 
+        <motion.div
           className={`p-4 rounded-md mb-6 ${formStatus.success ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -78,7 +120,7 @@ const ContactForm = () => {
           {formStatus.message}
         </motion.div>
       ) : null}
-      
+
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
@@ -93,7 +135,7 @@ const ContactForm = () => {
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary"
             />
           </div>
-          
+
           <div>
             <label htmlFor="email" className="block text-gray-700 font-body mb-1">Email Address *</label>
             <input
@@ -106,7 +148,7 @@ const ContactForm = () => {
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary"
             />
           </div>
-          
+
           <div>
             <label htmlFor="phone" className="block text-gray-700 font-body mb-1">Phone Number</label>
             <input
@@ -118,7 +160,7 @@ const ContactForm = () => {
               className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary"
             />
           </div>
-          
+
           <div>
             <label htmlFor="company" className="block text-gray-700 font-body mb-1">Company/Business Name</label>
             <input
@@ -131,7 +173,7 @@ const ContactForm = () => {
             />
           </div>
         </div>
-        
+
         <div className="mb-4">
           <label htmlFor="industry" className="block text-gray-700 font-body mb-1">Industry *</label>
           <select
@@ -148,7 +190,7 @@ const ContactForm = () => {
             ))}
           </select>
         </div>
-        
+
         <div className="mb-4">
           <label htmlFor="message" className="block text-gray-700 font-body mb-1">Message *</label>
           <textarea
@@ -162,7 +204,7 @@ const ContactForm = () => {
             placeholder="Tell us about your business needs and challenges..."
           ></textarea>
         </div>
-        
+
         <div className="mb-6">
           <label className="flex items-start">
             <input
@@ -178,7 +220,7 @@ const ContactForm = () => {
             </span>
           </label>
         </div>
-        
+
         <button
           type="submit"
           className="bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-md transition-colors duration-200 font-heading font-medium"

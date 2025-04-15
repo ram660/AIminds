@@ -6,16 +6,19 @@ import ValueProposition from '../../components/home/ValueProposition';
 import HowItWorks from '../../components/home/HowItWorks';
 import Testimonials from '../../components/home/Testimonials';
 import FooterCTA from '../../components/home/FooterCTA';
+import BlurredBackground from '../../components/shared/BlurredBackground';
 
 const HomePage = () => {
   return (
     <Layout>
-      <HeroSection />
-      <IndustryQuickSelect />
-      <ValueProposition />
-      <HowItWorks />
-      <Testimonials />
-      <FooterCTA />
+      <BlurredBackground className="min-h-screen">
+        <HeroSection />
+        <IndustryQuickSelect />
+        <ValueProposition />
+        <HowItWorks />
+        <Testimonials />
+        <FooterCTA />
+      </BlurredBackground>
     </Layout>
   );
 };

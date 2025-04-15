@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaComments, FaTools, FaPlug, FaHeadset } from 'react-icons/fa';
+import GlassCard from '../shared/GlassCard';
 
 const steps = [
   {
@@ -27,9 +28,13 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-16 bg-primary text-white">
-      <div className="container mx-auto px-4">
-        <motion.div 
+    <section className="py-20 bg-gradient-to-br from-primary to-primary/90 text-white relative overflow-hidden">
+      {/* Floating elements */}
+      <div className="absolute top-20 right-10 w-24 h-24 bg-white/5 rounded-full blur-md"></div>
+      <div className="absolute bottom-20 left-10 w-32 h-32 bg-secondary/10 rounded-full blur-md"></div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -41,10 +46,10 @@ const HowItWorks = () => {
             Our streamlined process makes implementing AI in your business simple and effective
           </p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (
-            <motion.div 
+            <motion.div
               key={step.title}
               className="relative"
               initial={{ opacity: 0, y: 20 }}
@@ -52,14 +57,14 @@ const HowItWorks = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="bg-white/10 rounded-lg p-6 h-full">
+              <GlassCard className="h-full transform hover:scale-105 transition-transform duration-300">
                 <div className="flex justify-center items-center w-16 h-16 bg-primary/80 rounded-full mb-4 mx-auto">
                   {step.icon}
                 </div>
                 <h3 className="text-xl font-heading font-bold mb-3 text-center">{step.title}</h3>
                 <p className="text-white/80 font-body text-center">{step.description}</p>
-              </div>
-              
+              </GlassCard>
+
               {/* Arrow connecting steps (except for the last one) */}
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
